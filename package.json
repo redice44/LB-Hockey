@@ -1,0 +1,30 @@
+{
+  "name": "lb-hockey",
+  "version": "0.0.1",
+  "description": "LB Hockey Website",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matt Thomson",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "mongodb": "^2.0.46"
+  },
+  "devDependencies": {
+    "bower": "^1.6.3",
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jscs": "^3.0.1",
+    "gulp-jshint": "^1.11.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-uglify": "^1.4.2",
+    "gulp-util": "^3.0.7",
+    "jshint-stylish": "^2.0.1"
+  }
+}
