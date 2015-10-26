@@ -14,5 +14,6 @@
     "tests"
   ],
   "dependencies": {
+    "paper-card": "PolymerElements/paper-card#~1.0.7"
   }
 }
