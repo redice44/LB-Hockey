@@ -1,0 +1,93 @@
+<dom-module id='shared-styles'>
+  <template>
+    <style>
+      paper-icon-item {
+        border-bottom: 1px solid #ccc;
+      }
+      paper-icon-item:last-child {
+        border-bottom: 1px solid transparent;
+      }
+
+      paper-scroll-header-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: var(--paper-grey-200, #eee);
+        /* background for toolbar when it is at its full size */
+        --paper-scroll-header-panel-full-header: {
+          background-image: url(./../images/ice.jpg);
+        };
+        /* background for toolbar when it is condensed */
+        --paper-scroll-header-panel-condensed-header: {
+          background-color: var(--paper-grey-500, #ff5722);
+        };
+      }
+
+      paper-toolbar.tall {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      paper-toolbar.tall .title {
+        font-size: 40px;
+        line-height: 40px;
+        margin-left: 60px;
+        -webkit-transform-origin: left center;
+        transform-origin: left center;
+      }
+
+      paper-tabs, paper-toolbar {
+        background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      paper-toolbar paper-tabs {
+        box-shadow: none;
+      }
+
+      paper-tabs[noink][no-bar] paper-tab.iron-selected {
+        color: #ffff8d;
+      }
+
+      paper-tabs[align-bottom] {
+        box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      paper-tab {
+        --paper-tab-ink: #ccc;
+        font-size: 25px;
+        line-height: 25px;
+        /*height: 100%;*/
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: #ccc;
+
+        height: 100%;
+      }
+
+      .avatar {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #ccc;
+      }
+      .boozers {
+        background: url('./../images/Boozers.jpg');
+        background-size: cover;
+      }
+      .dragons {
+        background: url('./../images/Dragons.png');
+        background-size: cover; 
+      }
+      .five-holers {
+        background: url('./../images/Five-Holers.jpg');
+        background-size: cover;
+      }
+    </style>
+  </template>
+</dom-module>
