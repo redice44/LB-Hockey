@@ -11,26 +11,34 @@ html
     link(rel='import', href='./../paper-item/paper-item-body.html')
     link(rel='import', href='./../paper-icon-button/paper-icon-button.html')
     link(rel='import' href='./../iron-icons/iron-icons.html')
+    link(rel='import' href='./../iron-icons/editor-icons.html')
 
     link(rel='stylesheet', href='./stylesheets/all.css')
     link(rel='import', href='./elements/custom-paper-item.html')
     style(is='custom-style', include='shared-styles')
   body(unresolved)
-    paper-icon-item
-      .avatar.boozers(item-icon)
-      paper-item-body(two-line)
-        div Boozers
-        div(secondary) Oct. 22nd, 10:00PM
-      paper-icon-button(icon='star')
-    paper-icon-item
-      .avatar.dragons(item-icon)
-      paper-item-body(two-line)
-        div Dragons
-        div(secondary) Oct. 22nd, 10:00PM
-      paper-icon-button(icon='star')
-    paper-icon-item
-      .avatar.five-holers(item-icon)
-      paper-item-body(two-line)
-        div Five Holers
-        div(secondary) Oct. 22nd, 10:00PM
-      paper-icon-button(icon='star')
+    -
+      teams = [
+        {
+          name: "Boozers",
+          date: "Oct. 21st, 10:00PM",
+          icon: "boozers"
+        },
+        {
+          name: "Dragons",
+          date: "Oct. 28th, 8:45PM",
+          icon: "dragons"
+        },
+        {
+          name: "Five Holers",
+          date: "Nov. 4th, 10:00PM",
+          icon: "five-holers"
+        }
+      ];
+    each team in teams
+      paper-icon-item
+        .avatar(item-icon, class=team.icon)
+        paper-item-body(two-line)
+          div=team.name
+          div(secondary)=team.date
+        paper-icon-button(icon='editor:insert-chart')
