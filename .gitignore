@@ -1,4 +1,6 @@
 node_modules
 bower_components
+bin
 *.log
 app/**/*.css
+app/public/images
