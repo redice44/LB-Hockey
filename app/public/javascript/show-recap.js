@@ -9,9 +9,13 @@ $(document).ready(function() {
         btn.attr('icon', 'expand-less') :
         btn.attr('icon', 'expand-more');
 
-    header.attr('elevation') == 0 ?
-        header.attr('elevation', 3) :
-        header.attr('elevation', 0);
-    recap.slideToggle();
+    if(header.attr('elevation') == 0) {
+        recap.slideToggle();
+        header.attr('elevation', 3);
+    } else {
+        recap.slideToggle(400, function() {
+            header.attr('elevation', 0);
+        });
+    }
   });
 });
