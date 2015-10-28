@@ -230,7 +230,6 @@ html
               paper-icon-button.recap(icon='expand-more')
           paper-material.recap(elevation='0', animated, style='display: none;')
             paper-icon-item
-              
               if game.recap.scoringSummary.our > game.recap.scoringSummary.opp
                 .avatar.letter.win(item-icon)
               else if game.recap.scoringSummary.our == game.recap.scoringSummary.opp
@@ -244,7 +243,7 @@ html
               each goal in period.goals
                 paper-item
                   paper-item-body(two-line)
-                    div Goal
+                    div(class='#{goal.who}') Goal
                     div(secondary) ##{goal.scorer} - ##{goal.primary} ##{goal.secondary}
             paper-material.subheader(elevation='0') Penalty Summary
             each period in game.recap.penaltySummary.periods
