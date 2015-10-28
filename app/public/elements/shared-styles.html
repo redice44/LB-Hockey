@@ -15,7 +15,12 @@
 
       paper-material.recap {
         border-bottom: 1px solid #ccc;
-        padding: 0 20px;
+        padding: 10px 20px 0 20px;
+      }
+
+      paper-material.subheader {
+        margin-top: 10px;
+        border-bottom: 1px solid #ccc;
       }
 
       paper-icon-item {
@@ -98,6 +103,30 @@
         overflow: hidden;
         background: #ccc;
       }
+      .avatar.letter {
+        text-align: center;
+        font-size: 25px;
+        line-height: 40px;
+        font-weight: bold;
+        color: #EEEEEE;
+      }
+
+      .avatar.win {
+        background-color: green;
+      }
+
+      .avatar.loss {
+        background-color: red;
+      } 
+
+      .avatar.win::before {
+        content: "W";
+      }
+
+      .avatar.loss::before {
+        content: "L";
+      }
+
       .boozers {
         background: url('./../images/Boozers.jpg');
         background-size: cover;
