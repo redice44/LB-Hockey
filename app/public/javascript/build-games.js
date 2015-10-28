@@ -66,8 +66,28 @@ function generateGames(numGames) {
     game.recap = {};
     game.recap.scoringSummary = buildSummary(PERIODS, EVENT_BOUNDS, buildScoringPeriod);
     game.recap.penaltySummary = buildSummary(PERIODS, EVENT_BOUNDS, buildPenaltyPeriod);
+    game.recap.scoringSummary.our = game.recap.scoringSummary.periods.reduce(
+      function(prev, curr) {
+        return prev + curr.goals.reduce(function(prev, curr) {
+          curr.who === 'our' ? prev++ : '';
+          return prev;
+        }, 0);
+
+      }, 0);
+    game.recap.scoringSummary.opp = game.recap.scoringSummary.periods.reduce(
+      function(prev, curr) {
+        return prev + curr.goals.reduce(function(prev, curr) {
+          curr.who === 'opp' ? prev++ : '';
+          return prev;
+        }, 0);
+
+      }, 0);
 
     return game;
+  }
+
+  function sumPeriodGoals(team) {
+
   }
 
   /* Returns Object of a Summary */
@@ -160,4 +180,3 @@ function generateGames(numGames) {
     return (Math.floor(Math.random() * 100) + 1) <= weight;
   }
 }
-games = generateGames(10);

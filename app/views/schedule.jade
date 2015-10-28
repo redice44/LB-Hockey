@@ -96,8 +96,28 @@ html
           game.recap = {};
           game.recap.scoringSummary = buildSummary(PERIODS, EVENT_BOUNDS, buildScoringPeriod);
           game.recap.penaltySummary = buildSummary(PERIODS, EVENT_BOUNDS, buildPenaltyPeriod);
+          game.recap.scoringSummary.our = game.recap.scoringSummary.periods.reduce(
+            function(prev, curr) {
+              return prev + curr.goals.reduce(function(prev, curr) {
+                curr.who === 'our' ? prev++ : '';
+                return prev;
+              }, 0);
+
+            }, 0);
+          game.recap.scoringSummary.opp = game.recap.scoringSummary.periods.reduce(
+            function(prev, curr) {
+              return prev + curr.goals.reduce(function(prev, curr) {
+                curr.who === 'opp' ? prev++ : '';
+                return prev;
+              }, 0);
+
+            }, 0);
 
           return game;
+        }
+
+        function sumPeriodGoals(team) {
+
         }
 
         /* Returns Object of a Summary */
@@ -190,8 +210,8 @@ html
           return (Math.floor(Math.random() * 100) + 1) <= weight;
         }
       }
-
       games = generateGames(10);
+
     paper-scroll-header-panel(condenses)
       paper-toolbar.tall
         paper-tabs.bottom(selected='0')
@@ -211,7 +231,7 @@ html
           paper-material.recap(elevation='0', animated, style='display: none;')
             paper-icon-item
               .avatar.letter.win(item-icon)
-              //- | #{game.recap.our} - #{game.recap.opp}}
+              | #{game.recap.scoringSummary.our} - #{game.recap.scoringSummary.opp}
             paper-material.subheader(elevation='0') Scoring Summary
             each period in game.recap.scoringSummary.periods
               paper-material.subheader(elevation='0')=period.name
