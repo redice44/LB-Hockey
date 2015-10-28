@@ -23,7 +23,7 @@ html
     style(is='custom-style', include='shared-styles')
 
     script(src='./../jquery/dist/jquery.min.js')
-    script(src='./../javascript/test.js')
+    script(src='./../javascript/show-recap.js')
   body(unresolved)
     -
       teams = [
@@ -129,7 +129,7 @@ html
               paper-item-body(two-line)
                 div=team.name
                 div(secondary)=team.date
-              paper-icon-button(icon='expand-more')
+              paper-icon-button.recap(icon='expand-more')
           paper-material.recap(elevation='0', animated, style='display: none;')
             h1 Recap
             p stuff
