@@ -5,7 +5,8 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
     meta(name='viewport', content='width=device-width', minimum-scale=1.0, initial-scale=1, user-scalable="yes")
 
-    script(src='../../webcomponentsjs/webcomponents-lite.js')
+    script(src='./../webcomponentsjs/webcomponents-lite.js')
+    link(rel='import', href='./../paper-material/paper-material.html')
     link(rel='import', href='./../paper-item/paper-item.html')
     link(rel='import', href='./../paper-item/paper-icon-item.html')
     link(rel='import', href='./../paper-item/paper-item-body.html')
@@ -20,6 +21,9 @@ html
     link(rel='stylesheet', href='./stylesheets/all.css')
     link(rel='import', href='./elements/shared-styles.html')
     style(is='custom-style', include='shared-styles')
+
+    script(src='./../jquery/dist/jquery.min.js')
+    script(src='./../javascript/test.js')
   body(unresolved)
     -
       teams = [
@@ -118,9 +122,14 @@ html
           paper-tab Roster
       .content
       each team in teams
-        paper-icon-item
-          .avatar(item-icon, class=team.icon)
-          paper-item-body(two-line)
-            div=team.name
-            div(secondary)=team.date
-          paper-icon-button(icon='editor:insert-chart')
+        .game
+          paper-material.header(elevation='0', animated)
+            paper-icon-item(toggles)
+              .avatar(item-icon, class=team.icon)
+              paper-item-body(two-line)
+                div=team.name
+                div(secondary)=team.date
+              paper-icon-button(icon='expand-more')
+          paper-material.recap(elevation='0', animated, style='display: none;')
+            h1 Recap
+            p stuff

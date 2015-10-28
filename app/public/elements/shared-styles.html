@@ -1,11 +1,29 @@
 <dom-module id='shared-styles'>
-  <template>
+  <template is='dom-bind' id='test'>
     <style>
-      paper-icon-item {
+      /*paper-material {
         border-bottom: 1px solid #ccc;
       }
-      paper-icon-item:last-child {
+      paper-material:last-child {
         border-bottom: 1px solid transparent;
+      }*/
+
+      paper-material.header {
+        /*border-top: 1px solid #ccc;*/
+        border-bottom: 1px solid #ccc;
+      }
+
+      paper-material.recap {
+        border-bottom: 1px solid #ccc;
+        padding: 0 20px;
+      }
+
+      paper-icon-item {
+        --paper-item-focused: {
+        };
+        --paper-item-focused-before: {
+          background-color: transparent;
+        }
       }
 
       paper-scroll-header-panel {
@@ -66,6 +84,10 @@
         --paper-tabs-selection-bar-color: #ccc;
 
         height: 100%;
+      }
+
+      .hidden {
+        display: none;
       }
 
       .avatar {
