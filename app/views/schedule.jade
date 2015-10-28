@@ -230,7 +230,13 @@ html
               paper-icon-button.recap(icon='expand-more')
           paper-material.recap(elevation='0', animated, style='display: none;')
             paper-icon-item
-              .avatar.letter.win(item-icon)
+              
+              if game.recap.scoringSummary.our > game.recap.scoringSummary.opp
+                .avatar.letter.win(item-icon)
+              else if game.recap.scoringSummary.our == game.recap.scoringSummary.opp
+                .avatar.letter.tie(item-icon)
+              else
+                .avatar.letter.loss(item-icon)
               | #{game.recap.scoringSummary.our} - #{game.recap.scoringSummary.opp}
             paper-material.subheader(elevation='0') Scoring Summary
             each period in game.recap.scoringSummary.periods
