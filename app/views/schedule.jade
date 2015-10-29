@@ -240,10 +240,10 @@ html
                   .avatar.letter.loss(item-icon)
                 | #{game.recap.scoringSummary.our} - #{game.recap.scoringSummary.opp}
             paper-material.summary.spacious.goal(elevation='0', animated) 
-              paper-item
+              paper-icon-item
                 paper-item-body
                   div Scoring Summary
-                  div(secondary) 1 2 3
+                  //- div(secondary) 1 2 3
                 paper-icon-button.goal(icon='expand-more')
             paper-material.goals(style='display: none;')
               each period in game.recap.scoringSummary.periods
@@ -254,10 +254,10 @@ html
                       div(class='#{goal.who}') Goal
                       div(secondary) ##{goal.scorer} - ##{goal.primary} ##{goal.secondary}
             paper-material.summary.spacious.penalty(elevation='0', animated) 
-              paper-item
+              paper-icon-item
                 paper-item-body
                   div Penalty Summary
-                  div(secondary) 1 2 3
+                  //- div(secondary) 1 2 3
                 paper-icon-button.penalty(icon='expand-more')
             paper-material.penalties(style='display: none;')
               each period in game.recap.penaltySummary.periods
