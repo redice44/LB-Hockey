@@ -198,9 +198,24 @@
       }
 
       .data > div {
-        flex-grow: 1;
+        /*flex-grow: 1;*/
         box-sizing: border-box;
         text-align: center;
+      }
+
+      .data-table .name {
+        display: flex;
+        flex-grow: 2;
+        width: 0;
+      }
+
+      .data-table .name > div {
+        flex-grow: 10;
+        text-align: left;
+      }
+
+      .data-table .name .num {
+        flex-grow: 1;
       }
 
       .data-table.header > .data > div {
@@ -218,8 +233,12 @@
 
       .data-table .num {
         text-align: right;
+        margin-right: 10px;
       }
 
+      .item-4 > div {
+        width: 25%
+      }
     </style>
   </template>
 </dom-module>

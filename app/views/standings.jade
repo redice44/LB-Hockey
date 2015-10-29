@@ -39,7 +39,7 @@ block content
   .standings
     paper-item.data-table.header
       .team Team
-      .data
+      .data.item-4
         div Wins
         div Losses
         div Ties
@@ -47,7 +47,7 @@ block content
     each team in teams
       paper-item.data-table(style='order:#{team.points}')
         .team=team.name
-        .data
+        .data.item-4
           div=team.wins
           div=team.losses
           div=team.ties
