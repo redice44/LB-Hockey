@@ -196,9 +196,7 @@ html
 
         /* Returns a "date" as String */
         function chooseDate() {
-          return MONTHS[Math.floor(Math.random() * 12)] + ' ' +
-                  (Math.floor(Math.random() + 29) + 1) +
-                  Math.floor(Math.random()) ? '8:45PM' : '10:00PM';
+          return MONTHS[randomNum(MONTHS.length)] + ' ' + (randomNum(29) + 1) + ', ' + (randomWeight(50) ? '8:45PM' : '10:00PM');
         }
 
         /* Range is 0 - endRange-1 */
@@ -210,6 +208,7 @@ html
           return (Math.floor(Math.random() * 100) + 1) <= weight;
         }
       }
+
       games = generateGames(10);
 
     paper-scroll-header-panel(condenses)
@@ -243,7 +242,7 @@ html
                 paper-item-body
                   div Scoring Summary
                   div(secondary) 1 2 3
-                paper-icon-button(icon='expand-more')
+                paper-icon-button.goal(icon='expand-more')
             paper-material(style='display: none;')
               each period in game.recap.scoringSummary.periods
                 paper-item.subheader=period.name
@@ -257,7 +256,7 @@ html
                 paper-item-body
                   div Penalty Summary
                   div(secondary) 1 2 3
-                paper-icon-button(icon='expand-more')
+                paper-icon-button.penalty(icon='expand-more')
             paper-material(style='display: none;')
               each period in game.recap.penaltySummary.periods
                 paper-item.subheader=period.name

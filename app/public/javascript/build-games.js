@@ -166,9 +166,7 @@ function generateGames(numGames) {
 
   /* Returns a "date" as String */
   function chooseDate() {
-    return MONTHS[Math.floor(Math.random() * 12)] + ' ' +
-            (Math.floor(Math.random() + 29) + 1) +
-            Math.floor(Math.random()) ? '8:45PM' : '10:00PM';
+    return MONTHS[randomNum(MONTHS.length)] + ' ' + (randomNum(29) + 1) + ', ' + (randomWeight(50) ? '8:45PM' : '10:00PM');
   }
 
   /* Range is 0 - endRange-1 */
