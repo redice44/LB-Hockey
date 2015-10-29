@@ -1,25 +1,54 @@
 extends ./layout.jade
 
 block content
+  -
+    var TEAMS = [
+      "Lucky Bastards",
+      "Boozers",
+      "Dragons",
+      "Five Holers"
+    ];
+
+    /* Returns an Array of Team Objects */
+    function generateTeams(numGames) {
+      var i;
+      var teams = [];
+
+      for (i = 0; i < TEAMS.length; i++) {
+        teams.push(generateTeam(TEAMS[i], numGames));
+      }
+
+      return teams;
+    }
+
+    /* Returns an Object of a Team */
+    function generateTeam(name, numGames) {
+      var team = {};
+      team.name = name;
+      team.wins = Math.floor(Math.random() * (numGames + 1));
+      team.losses  = Math.floor(Math.random() * (numGames - team.wins + 1));
+      team.ties = numGames - team.wins - team.losses;
+      team.points = team.wins * 2 + team.ties;
+
+      return team;
+    }
+
+    teams = generateTeams(8);
+
+
   .content
-    paper-item.data-table
+    paper-item.data-table.header
       .team Team
       .data
-        .header Wins
-        .header Losses
-        .header Ties
-        .header Points
-    paper-item.data-table
-      .team Boozers
-      .data
-        div 3
-        div 3
-        div 0
-        div 6
-    paper-item.data-table
-      .team 5 Holers
-      .data
-        div 3
-        div 3
-        div 0
-        div 6
+        div Wins
+        div Losses
+        div Ties
+        div Points
+    each team in teams
+      paper-item.data-table
+        .team=team.name
+        .data
+          div=team.wins
+          div=team.losses
+          div=team.ties
+          div=team.points

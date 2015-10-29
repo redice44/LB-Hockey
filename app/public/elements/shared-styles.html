@@ -175,7 +175,7 @@
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
-
+        border-top: 1px solid #ccc;
       }
 
       
@@ -200,8 +200,12 @@
         text-align: center;
       }
 
-      .data > .header {
+      .data-table.header > .data > div {
         text-align: center;
+      }
+
+      .data-table.header {
+        border-top: 1px solid transparent;
       }
 
       .data-table .text {
