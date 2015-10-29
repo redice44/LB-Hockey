@@ -25,6 +25,8 @@ html
 
     script(src='./../jquery/dist/jquery.min.js')
     script(src='./../javascript/show-recap.js')
+    script(src='./../javascript/show-goals.js')
+    script(src='./../javascript/show-penalties.js')
     //- script(src='./../javascript/build-games.js')
   body(unresolved)
     -
@@ -237,13 +239,13 @@ html
                 else
                   .avatar.letter.loss(item-icon)
                 | #{game.recap.scoringSummary.our} - #{game.recap.scoringSummary.opp}
-            paper-material.summary.spacious(elevation='0', animated) 
+            paper-material.summary.spacious.goal(elevation='0', animated) 
               paper-item
                 paper-item-body
                   div Scoring Summary
                   div(secondary) 1 2 3
                 paper-icon-button.goal(icon='expand-more')
-            paper-material(style='display: none;')
+            paper-material.goals(style='display: none;')
               each period in game.recap.scoringSummary.periods
                 paper-item.subheader=period.name
                 each goal in period.goals
@@ -251,13 +253,13 @@ html
                     paper-item-body.goal(two-line)
                       div(class='#{goal.who}') Goal
                       div(secondary) ##{goal.scorer} - ##{goal.primary} ##{goal.secondary}
-            paper-material.summary.spacious(elevation='0', animated) 
+            paper-material.summary.spacious.penalty(elevation='0', animated) 
               paper-item
                 paper-item-body
                   div Penalty Summary
                   div(secondary) 1 2 3
                 paper-icon-button.penalty(icon='expand-more')
-            paper-material(style='display: none;')
+            paper-material.penalties(style='display: none;')
               each period in game.recap.penaltySummary.periods
                 paper-item.subheader=period.name
                 each penalty in period.penalties
