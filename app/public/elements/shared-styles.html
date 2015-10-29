@@ -170,6 +170,48 @@
         content: " Against";
       }
 
+      paper-item.data-table {
+        justify-content: space-between;        
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+
+      }
+
+      
+
+      .data-table > div {
+        flex-grow: 1;
+        padding: 3px;
+        width: 0;
+      }
+
+      .data-table > .team {
+      }
+
+      .data-table > .data {
+        display: flex;
+        flex-grow: 4;
+      }
+
+      .data > div {
+        flex-grow: 1;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      .data > .header {
+        text-align: center;
+      }
+
+      .data-table .text {
+        text-align: left;
+      }
+
+      .data-table .num {
+        text-align: right;
+      }
+
     </style>
   </template>
 </dom-module>

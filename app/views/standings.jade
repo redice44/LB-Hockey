@@ -1,4 +1,25 @@
 extends ./layout.jade
 
 block content
-  .content Standings
+  .content
+    paper-item.data-table
+      .team Team
+      .data
+        .header Wins
+        .header Losses
+        .header Ties
+        .header Points
+    paper-item.data-table
+      .team Boozers
+      .data
+        div 3
+        div 3
+        div 0
+        div 6
+    paper-item.data-table
+      .team 5 Holers
+      .data
+        div 3
+        div 3
+        div 0
+        div 6
