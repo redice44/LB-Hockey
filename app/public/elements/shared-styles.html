@@ -178,7 +178,10 @@
         border-top: 1px solid #ccc;
       }
 
-      
+      .standings {
+        display: flex;
+        flex-direction: column-reverse;
+      }
 
       .data-table > div {
         flex-grow: 1;
@@ -206,6 +209,7 @@
 
       .data-table.header {
         border-top: 1px solid transparent;
+        order: 9999;
       }
 
       .data-table .text {

@@ -36,7 +36,7 @@ block content
     teams = generateTeams(8);
 
 
-  .content
+  .standings
     paper-item.data-table.header
       .team Team
       .data
@@ -45,7 +45,7 @@ block content
         div Ties
         div Points
     each team in teams
-      paper-item.data-table
+      paper-item.data-table(style='order:#{team.points}')
         .team=team.name
         .data
           div=team.wins
