@@ -1,17 +1,15 @@
-module.exports = exports = function(app) {
-  app.get('/', function(req, res, next) {
-    res.render('schedule', {section: 0});
-  });
+var ContentHandler = require('./content');
 
-  app.get('/schedule', function(req, res, next) {
-    res.render('schedule', {section: 0});
-  });
+module.exports = exports = function(app, db) {
+  "use strict";
 
-  app.get('/standings', function(req, res, next) {
-    res.render('standings', {section: 1});
-  });
+  var contentHandler = new ContentHandler(db);
 
-  app.get('/roster', function(req, res, next) {
-    res.render('roster', {section: 2});
-  });
+  app.get('/', contentHandler.displaySchedule);
+
+  app.get('/schedule', contentHandler.displaySchedule);
+
+  app.get('/standings', contentHandler.displayStandings);
+
+  app.get('/roster', contentHandler.displayRoster);
 };
