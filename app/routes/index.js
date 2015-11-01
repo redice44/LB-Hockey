@@ -1,7 +1,7 @@
 var ContentHandler = require('./content');
 
 module.exports = exports = function(app, db) {
-  "use strict";
+  // "use strict";
 
   var contentHandler = new ContentHandler(db);
 
@@ -12,4 +12,6 @@ module.exports = exports = function(app, db) {
   app.get('/standings', contentHandler.displayStandings);
 
   app.get('/roster', contentHandler.displayRoster);
+
+  app.get('/generate/season', contentHandler.generateSeason);
 };

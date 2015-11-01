@@ -3,8 +3,8 @@ var app = express();
 var routes = require('./routes/index');
 var MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
-  "use strict";
+MongoClient.connect('mongodb://localhost:27017/lb-hockey', function(err, db) {
+  // "use strict";
 
   if (err) {
     console.log(err);
