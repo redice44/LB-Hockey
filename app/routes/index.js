@@ -13,6 +13,7 @@ module.exports = exports = function(app, db) {
 
   app.get('/roster', contentHandler.displayRoster);
 
+  // Games RESTful API
   app.get('/game/:permalink', contentHandler.displayGame);
   app.delete('/game/:permalink', contentHandler.deleteGame);
 

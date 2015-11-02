@@ -6,3 +6,6 @@ block content
       li=game.season
       li=game.matchup
       li=game.date
+    form(action='/game/#{game.permalink}', method='POST', enctype='application/x-www-form-urlencoded')
+      input(type='hidden', value='DELETE', name='_method')
+      input(type='submit', value='Delete')
