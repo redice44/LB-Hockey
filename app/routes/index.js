@@ -13,5 +13,5 @@ module.exports = exports = function(app, db) {
 
   app.get('/roster', contentHandler.displayRoster);
 
-  app.get('/generate/season', contentHandler.generateSeason);
+  app.get('/generate-season', contentHandler.generateSeason);
 };

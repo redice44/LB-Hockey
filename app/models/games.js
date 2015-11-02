@@ -1,8 +1,9 @@
 function GamesDOA(db) {
   var games = db.collection('games');
 
-  this.getSchedule = function(callback) {
+  this.getSchedule = function(team, callback) {
     var query = {
+      matchup: team
     };
 
     var projection = {
@@ -12,13 +13,14 @@ function GamesDOA(db) {
       date: 1
     };
 
+    console.log('Games DOA: Getting Schedule');
     games.find(query, projection).sort(sort).toArray(function(err, docs) {
       if (err) {
         return callback(err, null);
       }
 
-      console.log('Getting ' + docs.length + ' games.');
-      return callback(null, docs);
+      console.log('Games DOA Callback: Getting ' + docs.length + ' games.');
+      callback(null, docs);
     });
   };
 
@@ -42,10 +44,11 @@ function GamesDOA(db) {
   this.addSeason = function(season, callback) {
     games.insertMany(season, function(err, result) {
       if (err) {
-        callback(err, null);
+        return callback(err, null);
       }
 
-      callback(null, result.ops);
+      console.log('Games DOA: Inserted Season');
+      return callback(null, result.ops);
     });
   };
 }

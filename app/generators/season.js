@@ -32,7 +32,7 @@ function SeasonGEN() {
       return false;
     }
 
-    console.log('Generating Season');
+    console.log('Season: Generating Season');
 
     var season = {};
     var games = [];
@@ -68,9 +68,9 @@ function SeasonGEN() {
       // console.log(gamesCount);
 
       games.push(gameGen.generateOne(teams[homeIndex], teams[awayIndex], start, end));
-      
+
       if (!verifySeason(gamesCount, gamesPlayed)) {
-        console.log('Resetting Season');
+        // console.log('Resetting Season');
         for (i = 0; i < teams.length; i++) {
           gamesCount[i] = 0;
         }
@@ -78,7 +78,6 @@ function SeasonGEN() {
       }
 
     }
-//gameGen.generateOne(teams[homeIndex], teams[awayIndex], start, end)
     return games;
   };
 }

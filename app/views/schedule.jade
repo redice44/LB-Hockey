@@ -2,19 +2,20 @@ extends ./layout.jade
 block content
   .content
   each game in games
-    p=game.date
-    ul
+    //- p=game.date
+    //- ul
       li=game.matchup[0]
       li=game.matchup[1]
-    //- .game
+    .game
       paper-material.header(elevation='0', animated)
         paper-icon-item
-          .avatar(item-icon, class=game.opp.icon)
+          //- class=game.opp.icon
+          .avatar(item-icon)
           paper-item-body(two-line)
-            div=game.opp.name
-            div(secondary)=game.puckDrop
+            div=game.matchup
+            div(secondary)=game.date
           paper-icon-button.recap(icon='expand-more')
-      paper-material.recap(elevation='0', animated, style='display: none;')
+      //- paper-material.recap(elevation='0', animated, style='display: none;')
         paper-material.spacious(elevation='0', animated)
           paper-icon-item
             if game.recap.scoringSummary.our > game.recap.scoringSummary.opp

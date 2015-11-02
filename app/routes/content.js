@@ -13,10 +13,21 @@ function ContentHandler(db) {
   this.displaySchedule = function(req, res, next) {
     // "use strict";
 
-    // get schedule
-    DOA.games.getSchedule(function(err, games) {
-      res.render('schedule', {
-        games: games,
+    var team = 'Lucky Bastards';
+
+    console.log('Content: Displaying Schedule');
+
+    DOA.games.getSchedule(team, function(err, scheduledGames) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      console.log('Content callback: Displaying Schedule: ' +
+        scheduledGames.length + ' Games');
+      // console.log('Schedule', scheduledGames);
+      return res.render('schedule', {
+        games: scheduledGames,
         section: 0
       });
     });
@@ -25,7 +36,6 @@ function ContentHandler(db) {
   this.generateSeason = function(req, res, next) {
     // "use strict";
 
-    var schedule;
     var name = 'Fall 2015';
     var start = new Date(2015, 07);
     var end = new Date(2015, 11);
@@ -37,6 +47,8 @@ function ContentHandler(db) {
       'Lucky Bastards'
     ];
 
+    console.log('Content: Generating Season');
+    
     DOA.games.addSeason(seasonGenerator.generate(name, start, end, gamesPlayed, teams),
       function(err, games) {
         if (err) {
@@ -44,8 +56,11 @@ function ContentHandler(db) {
           throw err;
         }
 
-        console.log('Season Generated');
-        res.redirect('/');
+        console.log('Games inserted: ', games.length);
+        // console.log('Games', games);
+
+        console.log('Content callback: Season Generated');
+        return res.redirect('/');
       });
   };
 

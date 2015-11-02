@@ -22,7 +22,7 @@ function GameGEN() {
   this.generateOne = function(home, away, start, end) {
     var game = {};
 
-    console.log('Generating Game');
+    // console.log('Generating Game');
 
     game.matchup = [];
     game.matchup.push(home);
