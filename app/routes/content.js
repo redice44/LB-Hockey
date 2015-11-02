@@ -1,6 +1,7 @@
 var TeamsDOA = require('./../models/teams').TeamsDOA;
 var GamesDOA = require('./../models/games').GamesDOA;
 var SeasonGenerator = require('./../generators/season').SeasonGEN;
+var SeasonSimulator = require('./../simulators/season').SeasonSIM;
 
 function ContentHandler(db) {
   // "use strict";
@@ -9,13 +10,13 @@ function ContentHandler(db) {
   DOA.teams = new TeamsDOA(db);
   DOA.games = new GamesDOA(db);
   var seasonGenerator = new SeasonGenerator();
+  // var seasonSimulator = new SeasonSimulator(DOA.games);
 
   this.displaySchedule = function(req, res, next) {
     // "use strict";
 
+    // Eventually pull from ... user session? Probably.
     var team = 'Lucky Bastards';
-
-    console.log('Content: Displaying Schedule');
 
     DOA.games.getSchedule(team, function(err, scheduledGames) {
       if (err) {
@@ -23,11 +24,25 @@ function ContentHandler(db) {
         throw err;
       }
 
-      console.log('Content callback: Displaying Schedule: ' +
-        scheduledGames.length + ' Games');
-      // console.log('Schedule', scheduledGames);
       return res.render('schedule', {
         games: scheduledGames,
+        section: 0
+      });
+    });
+  };
+
+  this.displaySeason = function(req, res, next) {
+    // Eventually pull from something
+    var season = 'Test Fall 2015';
+
+    DOA.games.getSeason(season, function(err, seasonGames) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      return res.render('schedule', {
+        games: seasonGames,
         section: 0
       });
     });
@@ -62,6 +77,10 @@ function ContentHandler(db) {
         console.log('Content callback: Season Generated');
         return res.redirect('/');
       });
+  };
+
+  this.simulateSeason = function(req, res, next) {
+
   };
 
   this.handleNewGame = function(req, res, next) {
