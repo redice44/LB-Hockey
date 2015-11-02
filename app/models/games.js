@@ -4,6 +4,7 @@ function GamesDOA(db) {
   function findGames(query, projection, sort, callback) {
     games.find(query, projection).sort(sort).toArray(function(err, scheduleGames) {
       if (err) {
+        console.log('Error: Games DOA findGames()');
         return callback(err, null);
       }
 
@@ -43,27 +44,58 @@ function GamesDOA(db) {
     return findGames(query, projection, sort, callback);
   };
 
-  this.addGame = function(season, home, away, date, callback) {
+  this.addGame = function(season, home, away, date, permalink, callback) {
     var gameEntry = {
-      'season': season,
       'matchup': [home, away],
-      'date': date
+      'date': date,
+      'permalink': permalink
     };
+
+    gameEntry.season = season.toLowerCase();
 
     games.insertOne(gameEntry, function(err, result) {
       if (err) {
+        console.log('Error: Games DOA addGame()');
         return callback(err, null);
       }
 
-      console.log('Inserted new game');
-      console.log(result.ops);
+      console.log('Games DOA: Inserted Game.');
       return callback(null, result.ops[0]);
+    });
+  };
+
+  this.getGame = function(permalink, callback) {
+    var query = {
+      'permalink': permalink
+    };
+
+    var projection = {};
+    var sort = {};
+
+    console.log('Games DOA: Getting a Game');
+    return findGames(query, projection, sort, callback);
+  };
+
+  this.deleteGame = function(permalink, callback) {
+    var query = {
+      'permalink': permalink
+    };
+
+    games.deleteOne(query, function(err, result) {
+      if (err) {
+        console.log('Error: Games DOA deleteGame()');
+        return callback(err, null);
+      }
+
+      console.log('Games DOA: Removed Game.');
+      return callback(null, result.deletedCount);
     });
   };
 
   this.addSeason = function(season, callback) {
     games.insertMany(season, function(err, result) {
       if (err) {
+        console.log('Error: Games DOA addSeason()');
         return callback(err, null);
       }
 

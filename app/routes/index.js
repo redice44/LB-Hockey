@@ -13,7 +13,13 @@ module.exports = exports = function(app, db) {
 
   app.get('/roster', contentHandler.displayRoster);
 
-  app.get('/season', contentHandler.displaySeason);
+  app.get('/game/:permalink', contentHandler.displayGame);
+  app.delete('/game/:permalink', contentHandler.deleteGame);
+
+  app.get('/addgame', contentHandler.displayAddGame);
+  app.post('/addgame', contentHandler.handleNewGame);
+
+  app.get('/season/:season', contentHandler.displaySeason);
 
   app.get('/generate-season', contentHandler.generateSeason);
 };

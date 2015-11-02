@@ -1,16 +1,10 @@
-var TeamsDOA = require('./../models/teams').TeamsDOA;
 var GamesDOA = require('./../models/games').GamesDOA;
 var SeasonGenerator = require('./../generators/season').SeasonGEN;
-var SeasonSimulator = require('./../simulators/season').SeasonSIM;
 
 function ContentHandler(db) {
-  // "use strict";
-
   var DOA = {};
-  DOA.teams = new TeamsDOA(db);
   DOA.games = new GamesDOA(db);
   var seasonGenerator = new SeasonGenerator();
-  // var seasonSimulator = new SeasonSimulator(DOA.games);
 
   this.displaySchedule = function(req, res, next) {
     // "use strict";
@@ -33,7 +27,7 @@ function ContentHandler(db) {
 
   this.displaySeason = function(req, res, next) {
     // Eventually pull from something
-    var season = 'Test Fall 2015';
+    var season = req.params.season.split('-').join(' ').toLowerCase();
 
     DOA.games.getSeason(season, function(err, seasonGames) {
       if (err) {
@@ -63,9 +57,10 @@ function ContentHandler(db) {
     ];
 
     console.log('Content: Generating Season');
-    
-    DOA.games.addSeason(seasonGenerator.generate(name, start, end, gamesPlayed, teams),
-      function(err, games) {
+
+    DOA.games.addSeason(seasonGenerator.generate(
+      name, start, end, gamesPlayed, teams
+      ), function(err, games) {
         if (err) {
           console.log(err);
           throw err;
@@ -79,13 +74,62 @@ function ContentHandler(db) {
       });
   };
 
-  this.simulateSeason = function(req, res, next) {
-
+  this.displayAddGame = function(req, res, next) {
+    return res.render('addgame');
   };
 
   this.handleNewGame = function(req, res, next) {
-    // "use strict";
+    var season = req.body.season;
+    var home = req.body.home;
+    var away = req.body.away;
+    var year = req.body.year;
+    var month = req.body.month;
+    var day = req.body.day;
+    var time = req.body.time.split(':');
+    var hour = time[0];
+    var minute = time[1];
+    var date = new Date(year, month, day, hour, minute);
+    var permalink = year + '-' + month + '-' + day + '-' + hour + '-' + minute;
+    console.log('Date: ', date);
 
+    DOA.games.addGame(season, home, away, date, permalink, function(err, game) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      return res.redirect('/game/' + game.permalink);
+    });
+  };
+
+  this.displayGame = function(req, res, next) {
+    var permalink = req.params.permalink;
+
+    DOA.games.getGame(permalink, function(err, game) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      console.log('Displaying Game');
+      return res.render('game', {
+        'game': game[0]
+      });
+    });
+  };
+
+  this.deleteGame = function(req, res, next) {
+    var permalink = req.params.permalink;
+
+    DOA.games.deleteGame(permalink, function(err, result) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      console.log('Removed ' + result + ' games');
+      return res.redirect('/');
+    });
   };
 
   this.displayStandings = function(req, res, next) {

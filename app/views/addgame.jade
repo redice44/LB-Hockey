@@ -1,0 +1,44 @@
+extends ./layout.jade
+
+block content
+  -
+    days = [];
+    for(i = 1; i < 32; i++) {
+      days.push(i);
+    }
+  form(action='/addgame', method='POST')
+    div
+      label Season
+        input(type='text', name='season', placeholder='What Season?')
+    div
+      label Home Team
+        input(type='text', name='home', placeholder='Home Team')
+      label Away Team
+        input(type='text', name='away', placeholder='Away Team')
+    div
+      label Date
+        select(name='year')
+          option(value='2015') 2015
+          option(value='2016') 2016
+        select(name='month')
+          option(value='0') Jan
+          option(value='1') Feb
+          option(value='2') Mar
+          option(value='3') Apr
+          option(value='4') May
+          option(value='5') Jun
+          option(value='6') Jul
+          option(value='7') Aug
+          option(value='8') Sep
+          option(value='9') Oct
+          option(value='10') Nov
+          option(value='11') Dec
+        select(name='day')
+          each day in days
+            option(value='#{day}')=day
+        select(name='time')
+          option(value='20:45') 8:45 PM
+          option(value='22:00') 10:00 PM
+
+    div
+      input(type='submit')
