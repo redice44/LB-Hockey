@@ -2,10 +2,6 @@ extends ./layout.jade
 block content
   .content
   each game in games
-    //- p=game.date
-    //- ul
-      li=game.matchup[0]
-      li=game.matchup[1]
     .game
       paper-material.header(elevation='0', animated)
         paper-icon-item
@@ -14,42 +10,44 @@ block content
           paper-item-body(two-line)
             div=game.matchup
             div(secondary)=game.date
-          paper-icon-button.recap(icon='expand-more')
-      //- paper-material.recap(elevation='0', animated, style='display: none;')
-        paper-material.spacious(elevation='0', animated)
-          paper-icon-item
-            if game.recap.scoringSummary.our > game.recap.scoringSummary.opp
-              .avatar.letter.win(item-icon)
-            else if game.recap.scoringSummary.our == game.recap.scoringSummary.opp
-              .avatar.letter.tie(item-icon)
-            else
-              .avatar.letter.loss(item-icon)
-            | #{game.recap.scoringSummary.our} - #{game.recap.scoringSummary.opp}
-        paper-material.summary.spacious.goal(elevation='0', animated) 
-          paper-icon-item
-            paper-item-body
-              div Scoring Summary
-              //- div(secondary) 1 2 3
-            paper-icon-button.goal(icon='expand-more')
-        paper-material.goals(style='display: none;')
-          each period in game.recap.scoringSummary.periods
-            paper-item.subheader=period.name
-            each goal in period.goals
-              paper-icon-item
-                paper-item-body.goal(two-line)
-                  div(class='#{goal.who}') Goal
-                  div(secondary) ##{goal.scorer} - ##{goal.primary} ##{goal.secondary}
-        paper-material.summary.spacious.penalty(elevation='0', animated) 
-          paper-icon-item
-            paper-item-body
-              div Penalty Summary
-              //- div(secondary) 1 2 3
-            paper-icon-button.penalty(icon='expand-more')
-        paper-material.penalties(style='display: none;')
-          each period in game.recap.penaltySummary.periods
-            paper-item.subheader=period.name
-            each penalty in period.penalties
-              paper-icon-item
-                paper-item-body.penalty(two-line)
-                  div #{penalty.name} (#{penalty.type})
-                  div(secondary) ##{penalty.player}
+          if game.scoringSummary
+            paper-icon-button.recap(icon='expand-more')
+      if game.scoringSummary
+        paper-material.recap(elevation='0', animated, style='display: none;')
+          paper-material.spacious(elevation='0', animated)
+            paper-icon-item
+              if game.recap.scoringSummary.our > game.recap.scoringSummary.opp
+                .avatar.letter.win(item-icon)
+              else if game.recap.scoringSummary.our == game.recap.scoringSummary.opp
+                .avatar.letter.tie(item-icon)
+              else
+                .avatar.letter.loss(item-icon)
+              | #{game.recap.scoringSummary.our} - #{game.recap.scoringSummary.opp}
+          paper-material.summary.spacious.goal(elevation='0', animated) 
+            paper-icon-item
+              paper-item-body
+                div Scoring Summary
+                //- div(secondary) 1 2 3
+              paper-icon-button.goal(icon='expand-more')
+          paper-material.goals(style='display: none;')
+            each period in game.recap.scoringSummary.periods
+              paper-item.subheader=period.name
+              each goal in period.goals
+                paper-icon-item
+                  paper-item-body.goal(two-line)
+                    div(class='#{goal.who}') Goal
+                    div(secondary) ##{goal.scorer} - ##{goal.primary} ##{goal.secondary}
+          paper-material.summary.spacious.penalty(elevation='0', animated) 
+            paper-icon-item
+              paper-item-body
+                div Penalty Summary
+                //- div(secondary) 1 2 3
+              paper-icon-button.penalty(icon='expand-more')
+          paper-material.penalties(style='display: none;')
+            each period in game.recap.penaltySummary.periods
+              paper-item.subheader=period.name
+              each penalty in period.penalties
+                paper-icon-item
+                  paper-item-body.penalty(two-line)
+                    div #{penalty.name} (#{penalty.type})
+                    div(secondary) ##{penalty.player}
