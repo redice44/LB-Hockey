@@ -44,6 +44,17 @@ function GamesDOA(db) {
     return findGames(query, projection, sort, callback);
   };
 
+  this.getAllGames = function(callback) {
+    var query = {};
+    var projection = {};
+    var sort = {
+      date: 1
+    };
+
+    console.log('Games DOA: Getting All Games');
+    return findGames(query, projection, sort, callback);
+  };
+
   this.addGame = function(season, home, away, date, permalink, callback) {
     var gameEntry = {
       'matchup': [home, away],

@@ -13,12 +13,16 @@ module.exports = exports = function(app, db) {
 
   app.get('/roster', contentHandler.displayRoster);
 
-  // Games RESTful API
-  app.get('/game/:permalink', contentHandler.displayGame);
-  app.delete('/game/:permalink', contentHandler.deleteGame);
+  app.get('/games', contentHandler.displayAllGames);
 
-  app.get('/addgame', contentHandler.displayAddGame);
-  app.post('/addgame', contentHandler.handleNewGame);
+  // Games RESTful API
+  app.route('/games/:permalink')
+    .get(contentHandler.displayGame)
+    .delete(contentHandler.deleteGame);
+
+  app.route('/addgame')
+    .get(contentHandler.displayAddGame)
+    .post(contentHandler.handleNewGame);
 
   app.get('/season/:season', contentHandler.displaySeason);
 

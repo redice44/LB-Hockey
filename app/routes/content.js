@@ -18,7 +18,7 @@ function ContentHandler(db) {
         throw err;
       }
 
-      return res.render('schedule', {
+      return res.render('games', {
         games: scheduledGames,
         section: 0
       });
@@ -35,7 +35,7 @@ function ContentHandler(db) {
         throw err;
       }
 
-      return res.render('schedule', {
+      return res.render('games', {
         games: seasonGames,
         section: 0
       });
@@ -98,7 +98,21 @@ function ContentHandler(db) {
         throw err;
       }
 
-      return res.redirect('/game/' + game.permalink);
+      return res.redirect('/games/' + game.permalink);
+    });
+  };
+
+  this.displayAllGames = function(req, res, next) {
+    DOA.games.getAllGames(function(err, games) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
+
+      console.log('Displaying All Games');
+      return res.render('games', {
+        'games': games
+      });
     });
   };
 
