@@ -18,7 +18,9 @@ module.exports = exports = function(app, db) {
   // Games RESTful API
   app.route('/games/:permalink')
     .get(contentHandler.displayGame)
+    .put(contentHandler.updateGame)
     .delete(contentHandler.deleteGame);
+  app.get('/games/:permalink/edit', contentHandler.displayEditGame);
 
   app.route('/addgame')
     .get(contentHandler.displayAddGame)

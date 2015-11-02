@@ -126,10 +126,36 @@ function ContentHandler(db) {
       }
 
       console.log('Displaying Game');
-      return res.render('game', {
+      return res.render('game/show', {
         'game': game[0]
       });
     });
+  };
+
+  this.displayEditGame = function(req, res, next) {
+    var permalink = req.params.permalink;
+
+    DOA.games.getGame(permalink, function(err, game) {
+      if(err) {
+        console.log(err);
+        throw err;
+      }
+
+      console.log('Displaying Edit Game.');
+      return res.render('game/edit', {
+        'game': game[0]
+      });
+    });
+  };
+
+  this.updateGame = function(req, res, next) {
+    var permalink = req.params.permalink;
+
+    console.log(req.body.goals);
+
+    // build scoring and penalty summaries
+    // update
+    return res.redirect('/games/' + permalink);
   };
 
   this.deleteGame = function(req, res, next) {

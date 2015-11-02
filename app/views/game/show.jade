@@ -1,4 +1,4 @@
-extends ./layout.jade
+extends ./../layout.jade
 
 block content
   .game
@@ -6,6 +6,7 @@ block content
       li=game.season
       li=game.matchup
       li=game.date
+    a(href='/games/#{game.permalink}/edit') Edit
     form(action='/games/#{game.permalink}', method='POST', enctype='application/x-www-form-urlencoded')
       input(type='hidden', value='DELETE', name='_method')
       input(type='submit', value='Delete')
