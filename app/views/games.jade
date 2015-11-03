@@ -15,10 +15,10 @@ block content
       if game.scoringSummary
         paper-material.recap(elevation='0', animated, style='display: none;')
           paper-material.spacious(elevation='0', animated)
-            paper-icon-item
-              if game.recap.scoringSummary.our > game.recap.scoringSummary.opp
+            //- paper-icon-item
+              if game.scoringSummary.our > game.scoringSummary.opp
                 .avatar.letter.win(item-icon)
-              else if game.recap.scoringSummary.our == game.recap.scoringSummary.opp
+              else if game.scoringSummary.our == game.scoringSummary.opp
                 .avatar.letter.tie(item-icon)
               else
                 .avatar.letter.loss(item-icon)
@@ -30,13 +30,11 @@ block content
                 //- div(secondary) 1 2 3
               paper-icon-button.goal(icon='expand-more')
           paper-material.goals(style='display: none;')
-            each period in game.recap.scoringSummary.periods
-              paper-item.subheader=period.name
-              each goal in period.goals
-                paper-icon-item
-                  paper-item-body.goal(two-line)
-                    div(class='#{goal.who}') Goal
-                    div(secondary) ##{goal.scorer} - ##{goal.primary} ##{goal.secondary}
+            each goal in game.scoringSummary
+              paper-icon-item
+                paper-item-body.goal(two-line)
+                  div(class='#{goal.who}') Goal
+                  div(secondary) ##{goal.goal[0]} - ##{goal.goal[1]} ##{goal.goal[2]}
           paper-material.summary.spacious.penalty(elevation='0', animated) 
             paper-icon-item
               paper-item-body
@@ -44,9 +42,7 @@ block content
                 //- div(secondary) 1 2 3
               paper-icon-button.penalty(icon='expand-more')
           paper-material.penalties(style='display: none;')
-            each period in game.recap.penaltySummary.periods
-              paper-item.subheader=period.name
-              each penalty in period.penalties
+              each penalty in game.penaltySummary
                 paper-icon-item
                   paper-item-body.penalty(two-line)
                     div #{penalty.name} (#{penalty.type})

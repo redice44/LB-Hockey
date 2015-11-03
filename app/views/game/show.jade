@@ -6,6 +6,8 @@ block content
       li=game.season
       li=game.matchup
       li=game.date
+      li=game.scoringSummary
+      li=game.penaltySummary
     a(href='/games/#{game.permalink}/edit') Edit
     form(action='/games/#{game.permalink}', method='POST', enctype='application/x-www-form-urlencoded')
       input(type='hidden', value='DELETE', name='_method')

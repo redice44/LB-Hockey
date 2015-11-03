@@ -5,6 +5,7 @@ function ContentHandler(db) {
   var DOA = {};
   DOA.games = new GamesDOA(db);
   var seasonGenerator = new SeasonGenerator();
+  var PERIOD_LENGTH = '13:00'; // 13 minute periods
 
   this.displaySchedule = function(req, res, next) {
     // "use strict";
@@ -148,11 +149,64 @@ function ContentHandler(db) {
     });
   };
 
+  function convertToSeconds(time) {
+    return parseInt(time.split(':')[0]) * 60 + parseInt(time.split(':')[1]);
+  }
+
+  function buildScoringSummary(goals) {
+    var summary = [];
+    var temp;
+
+    goals.forEach(function(goal) {
+      temp = {};
+
+      temp.time = convertToSeconds(goal.time) +
+        convertToSeconds(PERIOD_LENGTH) * (parseInt(goal.period) - 1);
+      temp.type = goal.type;
+      temp.goal = [];
+      temp.goal.push(goal.scorer);
+
+      if (goal.primary) {
+        temp.goal.push(goal.primary);
+        if (goal.secondary) {
+          temp.goal.push(goal.secondary);
+        }
+      }
+
+      temp.team = goal.who;
+      summary.push(temp);
+    });
+
+    console.log('Scoring Summary: ', summary);
+    return summary;
+  }
+
+  function buildPenaltySummary(penalties) {
+    var summary = [];
+    var temp;
+
+    penalties.forEach(function(penalty) {
+      temp = {};
+
+      temp.time = convertToSeconds(penalty.time) +
+        convertToSeconds(PERIOD_LENGTH) * (parseInt(penalty.period) - 1);
+      temp.type = penalty.type;
+      temp.name = penalty.name;
+      temp.team = penalty.who;
+      summary.push(temp);
+    });
+
+    console.log('Penalty Summary: ', summary);
+    return summary;
+  }
+
   this.updateGame = function(req, res, next) {
     var permalink = req.params.permalink;
 
     var goal;
     var penalty;
+    var scoringSummary;
+    var penaltySummary;
     var goals = req.body.goals;
     var penalties = req.body.penalties;
     var allPenalties = [];
@@ -172,9 +226,15 @@ function ContentHandler(db) {
 
     console.log(allGoals);
     console.log(allPenalties);
-    // build scoring and penalty summaries
-    // update
-    return res.redirect('/games/' + permalink);
+
+    scoringSummary = buildScoringSummary(allGoals);
+    penaltySummary = buildPenaltySummary(allPenalties);
+
+    DOA.games.updateGame(permalink, scoringSummary, penaltySummary, function(err, game) {
+      console.log(game);
+      return res.redirect('/games/' + game.permalink);
+    });
+
   };
 
   this.deleteGame = function(req, res, next) {

@@ -87,6 +87,33 @@ function GamesDOA(db) {
     return findGames(query, projection, sort, callback);
   };
 
+  this.updateGame = function(permalink, goals, penalties, callback) {
+    var query = {
+      'permalink': permalink
+    };
+
+    var update = {
+      '$set': {
+        'scoringSummary': goals,
+        'penaltySummary': penalties
+      }
+    };
+
+    var options = {
+      returnOriginal: false
+    };
+
+    games.findOneAndUpdate(query, update, options, function(err, result) {
+      if (err) {
+        console.log('Error: Games DOA updateGame()');
+        return callback(err, null);
+      }
+
+      console.log('Games DOA: Update Game');
+      return callback(null, result.value);
+    });
+  };
+
   this.deleteGame = function(permalink, callback) {
     var query = {
       'permalink': permalink

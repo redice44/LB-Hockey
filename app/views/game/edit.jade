@@ -19,12 +19,13 @@ block content
       input(type='submit')
   div(style='display:none;')
     #goal
+      div Goal
       div
         select.who
           option(value='home') Home Team
           option(value='away') Away Team
       div
-        input.time(type='text', size='6', placeholder='Time')
+        input.time(type='text', size='6', placeholder='00:00')
         select.period
           option(value='1') 1st Period
           option(value='2') 2nd Period
@@ -36,9 +37,9 @@ block content
           option(value='ppg') Power Play
           option(value='shg') Short Handed
           option(value='eng') Empty Net
-        input.scorer(type='text', size='10', placeholder='Goal')
-        input.primary(type='text', size='10', placeholder='Primary')
-        input.secondary(type='text', size='10', placeholder='Secondary')
+        input.scorer(type='text', size='2', maxlength='2', placeholder='G')
+        input.primary(type='text', size='2', maxlength='2', placeholder='A')
+        input.secondary(type='text', size='2', maxlength='2', placeholder='A')
     -
       penalties = [
         'Slashing',
@@ -47,12 +48,13 @@ block content
         'Roughing'
       ];
     #penalty
+      div Penalty
       div
         select.who
           option(value='home') Home Team
           option(value='away') Away Team
       div
-        input.time(type='text', size='6', placeholder='Time')
+        input.time(type='text', size='6', placeholder='00:00')
         select.period
           option(value='1') 1st Period
           option(value='2') 2nd Period
