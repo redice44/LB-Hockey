@@ -151,8 +151,27 @@ function ContentHandler(db) {
   this.updateGame = function(req, res, next) {
     var permalink = req.params.permalink;
 
-    console.log(req.body.goals);
+    var goal;
+    var penalty;
+    var goals = req.body.goals;
+    var penalties = req.body.penalties;
+    var allPenalties = [];
+    var allGoals = [];
 
+    for (goal in goals) {
+      if (goals.hasOwnProperty(goal)) {
+        allGoals.push(goals[goal]);
+      }
+    }
+
+    for (penalty in penalties) {
+      if (penalties.hasOwnProperty(penalty)) {
+        allPenalties.push(penalties[penalty]);
+      }
+    }
+
+    console.log(allGoals);
+    console.log(allPenalties);
     // build scoring and penalty summaries
     // update
     return res.redirect('/games/' + permalink);

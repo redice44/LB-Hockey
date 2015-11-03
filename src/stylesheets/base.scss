@@ -4,3 +4,16 @@ body {
   background-color: #ffffff;
   margin: 0;
 }
+
+.goal, .penalty {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+
+  div {
+    margin-bottom: 5px;
+
+    input, select {
+      margin-right: 5px;
+    }
+  }
+}

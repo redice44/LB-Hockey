@@ -2,39 +2,71 @@ extends ./../layout.jade
 
 block header
   script(src='/javascript/addGoal.js')
+  script(src='/javascript/addPenalty.js')
 
 block content
   -
     goals = ['goal-1', 'goal-2'];
   .game
+    button#add-goal Add Goal
+    button#add-penalty Add Penalty
     ul
       li=game.season
       li=game.matchup
       li=game.date
     form.goals(action='/games/#{game.permalink}', method='POST')
-      each goal in goals
-        div
-          select(name='goals[#{goal}][who]')
-            option(value='home') Home Team
-            option(value='away') Away Team
-        div
-          select(name='goals[#{goal}][period]')
-            option(value='1') 1st Period
-            option(value='2') 2nd Period
-            option(value='3') 3rd Period
-            option(value='4') Overtime
-          input(type='text', name='goals[#{goal}][time]', placeholder='Time of Goal')
-        div
-          select(name='goals[#{goal}][type]')
-            option(value='even') Even Strength
-            option(value='ppg') Power Play
-            option(value='shg') Short Handed
-            option(value='eng') Empty Net
-        div
-          input(type='text', name='goals[#{goal}][goal]', placeholder='Goal')
-        div
-          input(type='text', name='goals[#{goal}][goal]', placeholder='Primary')
-        div
-          input(type='text', name='goals[#{goal}][goal]', placeholder='Secondary')
       input(type='hidden', name='_method', value='PUT')      
       input(type='submit')
+  div(style='display:none;')
+    #goal
+      div
+        select.who
+          option(value='home') Home Team
+          option(value='away') Away Team
+      div
+        input.time(type='text', size='6', placeholder='Time')
+        select.period
+          option(value='1') 1st Period
+          option(value='2') 2nd Period
+          option(value='3') 3rd Period
+          option(value='4') Overtime
+      div
+        select.type
+          option(value='even') Even Strength
+          option(value='ppg') Power Play
+          option(value='shg') Short Handed
+          option(value='eng') Empty Net
+        input.scorer(type='text', size='10', placeholder='Goal')
+        input.primary(type='text', size='10', placeholder='Primary')
+        input.secondary(type='text', size='10', placeholder='Secondary')
+    -
+      penalties = [
+        'Slashing',
+        'Hooking',
+        'Tripping',
+        'Roughing'
+      ];
+    #penalty
+      div
+        select.who
+          option(value='home') Home Team
+          option(value='away') Away Team
+      div
+        input.time(type='text', size='6', placeholder='Time')
+        select.period
+          option(value='1') 1st Period
+          option(value='2') 2nd Period
+          option(value='3') 3rd Period
+          option(value='4') Overtime
+      div
+        select.name
+          each penalty in penalties
+            option(value='#{penalty.toLowerCase()}')=penalty
+        select.type
+          option(value='2') Minor
+          option(value='4') Double Minor
+          option(value='5') Major
+          option(value='10') Misconduct
+      div
+        input.player(type='text', size='10', placeholder='Player')
+
